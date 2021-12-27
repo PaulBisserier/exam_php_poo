@@ -15,13 +15,13 @@ if(empty($_GET['page'])){
             if(empty($url[1])){
               $logementController->displayLogements(); 
             } else if($url[1] === "add"){
-               echo "Ajoute un logement"; 
-            } else if($url[1] === "gvalid"){
-                $gameController->newGameValidation();
+                $logementController->newLogementForm(); 
+            } else if($url[1] === "formValidator"){
+                $logementController->newLogementValidation();
             } else if($url[1] === "edit"){
                echo "edition logement"; 
             } else if($url[1] === "editvalid"){
-                $gameController->editGameValidation();
+                //$logementController->editGameValidation();
             }
             else if($url[1] === "delete"){
                echo "suppression logement"; 
