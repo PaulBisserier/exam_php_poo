@@ -41,4 +41,21 @@ class LogementManager extends Manager {
         }
     
     }
+
+    public function newLogement($titre, $adresse, $ville, $cp, $surface, $prix, $photo, $type, $description){
+        $req = "INSERT INTO logement (titre, adresse, ville, cp, surface, prix, photo, type, description) 
+        VALUES (:titre, :adresse, :ville, :cp, :surface, :prix, :photo, :type, :description)";
+        $statement = $this->getBdd()->prepare($req);
+        $statement->bindValue(":titre",$titre, PDO::PARAM_STR);
+        $statement->bindValue(":adresse",$adresse, PDO::PARAM_INT);
+        $statement->bindValue(":ville",$ville, PDO::PARAM_STR);
+        $statement->bindValue(":cp",$cp, PDO::PARAM_STR);
+        $statement->bindValue(":surface",$surface, PDO::PARAM_INT);
+        $statement->bindValue(":prix",$prix, PDO::PARAM_INT);
+        $statement->bindValue(":photo",$photo, PDO::PARAM_STR);
+        $statement->bindValue(":type",$type, PDO::PARAM_STR);
+        $statement->bindValue(":description",$description, PDO::PARAM_STR);
+        $result = $statement->execute();
+        $statement->closeCursor();
+    }
 }
