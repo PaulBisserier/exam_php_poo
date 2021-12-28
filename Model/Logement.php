@@ -3,7 +3,7 @@
 class Logement {
 
     private  $id_logement;
-    private  $title;
+    private  $titre;
     private  $adresse; 
     private  $ville;
     private  $cp; 
@@ -13,9 +13,9 @@ class Logement {
     private  $type; 
     private  $description;
 
-    public function __construct(int $id_logement, $title, $adresse, $ville, $cp, $surface, $prix, $photo, $type, $description) {
+    public function __construct(int $id_logement, $titre, $adresse, $ville, $cp, $surface, $prix, $photo, $type, $description) {
         $this->id_logement = $id_logement; 
-        $this->title =$title;
+        $this->titre =$titre;
         $this->adresse = $adresse;
         $this->ville = $ville; 
         $this->cp = $cp;
@@ -26,8 +26,7 @@ class Logement {
         $this->description = $description; 
     }
     
-
-    /**
+   /**
      * Get the value of id_logement
      */ 
     public function getId_logement()
@@ -50,9 +49,9 @@ class Logement {
     /**
      * Get the value of title
      */ 
-    public function getTitle()
+    public function getTitre()
     {
-        return $this->title;
+        return $this->titre;
     }
 
     /**
@@ -60,9 +59,9 @@ class Logement {
      *
      * @return  self
      */ 
-    public function setTitle($title)
+    public function setTitre($titre)
     {
-        $this->title = $title;
+        $this->title = $titre;
 
         return $this;
     }
@@ -226,4 +225,7 @@ class Logement {
 
         return $this;
     }
+ 
+
+    
 }
