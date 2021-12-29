@@ -19,7 +19,7 @@ if(empty($_GET['page'])){
             } else if($url[1] === "formValidator"){
                 $logementController->newLogementValidation();
             } else if($url[1] === "edit"){
-               echo "edition logement"; 
+               $logementController->editLogement($url[2]); 
             } else if($url[1] === "editvalid"){
                 //$logementController->editGameValidation();
             }

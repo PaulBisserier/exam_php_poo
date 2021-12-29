@@ -13,7 +13,7 @@ class Logement {
     private  $type; 
     private  $description;
 
-    public function __construct(int $id_logement, $titre, $adresse, $ville, $cp, $surface, $prix, $photo, $type, $description) {
+    public function __construct( $id_logement = "", $titre, $adresse, $ville, $cp, $surface, $prix, $photo, $type, $description ="") {
         $this->id_logement = $id_logement; 
         $this->titre =$titre;
         $this->adresse = $adresse;

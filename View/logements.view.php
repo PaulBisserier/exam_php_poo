@@ -23,7 +23,11 @@
             <td><?= $logement->getCp()?></td>
             <td><?= $logement->getSurface()?></td>
             <td><?= $logement->getPrix()?></td>
-            <td><?= $logement->getPhoto()?></td>
+            <td>
+              <?php if($logement->getPhoto()) :?>
+              <img src="../Images/<?=$logement->getPhoto()?>" class="img-thumbnail" alt="">
+              <?php endif;?>
+            </td>
             <td><?= $logement->getType()?></td>
             <td><?= $logement->getDescription()?></td>
             <td><a href="<?= URL ?>logement/edit/<?= $logement->getId_logement() ?>"><i class="fas fa-edit"></i></a></td>
