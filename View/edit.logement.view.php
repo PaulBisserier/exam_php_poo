@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-<form method="POST" action="<?= URL ?>games/editvalid">
+<form method="POST" action="<?= URL ?>logement/editvalid" enctype="multipart/form-data">
  <!--Titre du logement-->
  <div class="form-group">
         <label for="title">titre du logement</label>

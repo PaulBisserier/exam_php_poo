@@ -21,7 +21,7 @@ if(empty($_GET['page'])){
             } else if($url[1] === "edit"){
                $logementController->editLogement($url[2]); 
             } else if($url[1] === "editvalid"){
-                //$logementController->editGameValidation();
+                $logementController->newLogementValidation();
             }
             else if($url[1] === "delete"){
                echo "suppression logement"; 

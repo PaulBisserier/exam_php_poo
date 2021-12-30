@@ -1,8 +1,17 @@
 <?php
 require_once 'Model/Logement.php';
+require_once 'Service/Utils.php';
+
 
 class formValidator
 {
+
+    private $utils;
+
+    public function __construct()
+    {
+        $this->utils = new Utils;
+    }
 
     /**
      * if empty return false
@@ -94,31 +103,57 @@ class formValidator
 
     /**
      * imageFormValidator
-     *
+     * Retourne l'image avec un nouveau nom
      * @param  mixed $data
      * @return void
      */
     public function imageFormValidator($data)
     {
         $result = false;
-        // Extensions autorisées.
-        $extensionValid = ['gif', 'jpeg', 'jpg', 'png'];
-        $imageInfo = new SplFileInfo($data["photo"]["name"]);
-        // test de validité de l'extension
-        if (in_array($imageInfo->getExtension(), $extensionValid)) {
-            // Création du nouveau nom du fichier
-            $temp = explode(".", $data["photo"]["name"]);
-            $newfilename = "Logement_" . round(microtime(true)) . '.' . end($temp);
+        if ($data["photo"]["error"] == UPLOAD_ERR_OK) {
+            // Extensions autorisées.
+            $extensionValid = ['gif', 'jpeg', 'jpg', 'png'];
+            $imageInfo = new SplFileInfo($data["photo"]["name"]);
+            // test de validité de l'extension
+            if (in_array($imageInfo->getExtension(), $extensionValid)) {
+                $newfilename = $this->renameImage($data);
+            } else {
+                $errors = "L'extension " . $imageInfo->getExtension() . " n'est pas valide ";
+            }
+
+            if (!empty($errors)) {
+                //$this->utils->dd($errors); 
+                $result = [
+                    "status" => false,
+                    "message" => "invalid",
+                    "newPath" => null,
+                    "raison" => $errors
+                ];
+            } else {
+                $result = [
+                    "status" => true,
+                    "message" => "valid",
+                    "newPath" => $newfilename
+                ];
+                // création du dossier
+                $this->utils->createDirectory();
+            }
         } else {
-            $errors = "L'extension n'est pas valide";
+            $result = [
+                "status"  => true,
+                "message" => "empty_post",
+                "newPath" => null
+            ];
         }
 
-        if (!empty($errors)) {
-            $result = ["status" => false, "message" => $errors];
-            return $result;
-        } else {
-            $result = ["status" => true, "newnamefile" => $newfilename];
-            return $result;
-        }
+        return $result;
+    }
+
+    public function renameImage($data)
+    {
+        // Création du nouveau nom du fichier
+        $temp = explode(".", $data["photo"]["name"]);
+        $newfilename = "Logement_" . round(microtime(true)) . '.' . end($temp);
+        return $newfilename;
     }
 }

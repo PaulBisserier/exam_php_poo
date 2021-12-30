@@ -65,11 +65,36 @@ class LogementManager extends Manager
         return $result;
     }
 
-    public function getLogementById($id){
-        foreach($this->logements as $logement) {
-           if($logement->getId_logement() == $id){
+    public function getLogementById($id)
+    {
+        foreach ($this->logements as $logement) {
+            if ($logement->getId_logement() == $id) {
                 return $logement;
-           }
+            }
+        }
+    }
+
+    public function editLogementDB($id, $titre, $adresse, $ville, $cp, $surface, $prix, $photo, $type, $description)
+    {
+        $req = "UPDATE logement SET titre = :titre, adresse = :adresse, ville = :ville, cp = :cp, surface = :surface, prix = :prix, photo = :photo,
+        type = :type, description = :description
+        WHERE id_logement = :id_logement";
+        $statement = $this->getBdd()->prepare($req);
+        $statement->bindValue(":id_logement", $id, PDO::PARAM_INT);
+        $statement->bindValue(":titre", $titre, PDO::PARAM_STR);
+        $statement->bindValue(":adresse", $adresse, PDO::PARAM_STR);
+        $statement->bindValue(":ville", $ville, PDO::PARAM_STR);
+        $statement->bindValue(":cp", $cp, PDO::PARAM_STR);
+        $statement->bindValue(":surface", $surface, PDO::PARAM_INT);
+        $statement->bindValue(":prix", $prix, PDO::PARAM_INT);
+        $statement->bindValue(":photo", $photo, PDO::PARAM_STR);
+        $statement->bindValue(":type", $type, PDO::PARAM_STR);
+        $statement->bindValue(":description", $description, PDO::PARAM_STR);
+        $result = $statement->execute();
+        $statement->closeCursor();
+
+        if ($result) {
+            echo "TOTO"; 
         }
     }
 }
