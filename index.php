@@ -24,7 +24,7 @@ if(empty($_GET['page'])){
                 $logementController->newLogementValidation();
             }
             else if($url[1] === "delete"){
-               echo "suppression logement"; 
+                $logementController->deleteLogement($url[2]);
             } 
         break;
     }

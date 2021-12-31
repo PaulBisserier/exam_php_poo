@@ -94,7 +94,20 @@ class LogementManager extends Manager
         $statement->closeCursor();
 
         if ($result) {
-            echo "TOTO"; 
+           return $result;
+        }
+    }
+
+    public function deleteLogementBD($id){
+        $req = "DELETE FROM logement WHERE id_logement = :id_logement";
+        $statement = $this->getBdd()->prepare($req);
+        $statement->bindValue(":id_logement", $id, PDO::PARAM_INT);
+        $result = $statement->execute();
+        $statement->closeCursor();
+
+        if($result ){
+          $game = $this->getLogementById($id);    
+          unset($game);
         }
     }
 }

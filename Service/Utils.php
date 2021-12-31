@@ -18,7 +18,9 @@ class Utils
         echo "--FIN DU SCRIPT--";
         die;
     }
-
+    /**
+     * créer le dossier images s'il n'existe pas.
+     */
     public function createDirectory()
     {
         $path = "Images";

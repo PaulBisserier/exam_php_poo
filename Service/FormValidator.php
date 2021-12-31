@@ -148,7 +148,9 @@ class formValidator
 
         return $result;
     }
-
+    /**
+     *  Renome le nom des fichiers qui sont passés en paramètre. 
+     */
     public function renameImage($data)
     {
         // Création du nouveau nom du fichier

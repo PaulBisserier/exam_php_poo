@@ -31,12 +31,12 @@ class LogementController
     }
 
     public function newLogementValidation()
-    {        
+    {
         $from = explode("/", $_SERVER["HTTP_REFERER"]);
-    
+
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
+
             $form =  $this->formValidator->formNewLogementValidator($_POST);
             $isImageOK = $this->formValidator->imageFormValidator($_FILES);
 
@@ -50,38 +50,35 @@ class LogementController
                     exit();
                 }
                 // Test d'ou vient le form => add ou edit
-                if($from[4] === "add"){
-                    
-                    // INSERTION DES DONNEES EN BASE
-                $response = $this->logementManager->newLogement(
-                    $form["valid_values"]['title'],
-                    $form["valid_values"]["adresse"],
-                    $form["valid_values"]["ville"],
-                    $form["valid_values"]["cp"],
-                    $form["valid_values"]["surface"],
-                    $form["valid_values"]["prix"],
-                    $isImageOK["newPath"],
-                    $form["valid_values"]["type"],
-                    $form["valid_values"]["description"]);
+                if ($from[4] === "add") {
 
-                } elseif($from[4] === "edit"){
-                  //UPDATE BASE DE DONNEE
-                  $response = $this->logementManager->editLogementDB(
-                    $_POST["id-logement"],
-                    $form["valid_values"]['title'],
-                    $form["valid_values"]["adresse"],
-                    $form["valid_values"]["ville"],
-                    $form["valid_values"]["cp"],
-                    $form["valid_values"]["surface"],
-                    $form["valid_values"]["prix"],
-                    $isImageOK["newPath"],
-                    $form["valid_values"]["type"],
-                    $form["valid_values"]["description"]
-                  );
-                  $this->utils->dd($response);
+                    // INSERTION DES DONNEES EN BASE
+                    $response = $this->logementManager->newLogement(
+                        $form["valid_values"]['title'],
+                        $form["valid_values"]["adresse"],
+                        $form["valid_values"]["ville"],
+                        $form["valid_values"]["cp"],
+                        $form["valid_values"]["surface"],
+                        $form["valid_values"]["prix"],
+                        $isImageOK["newPath"],
+                        $form["valid_values"]["type"],
+                        $form["valid_values"]["description"]
+                    );
+                } elseif ($from[4] === "edit") {
+                    //UPDATE BASE DE DONNEE
+                    $response = $this->logementManager->editLogementDB(
+                        $_POST["id-logement"],
+                        $form["valid_values"]['title'],
+                        $form["valid_values"]["adresse"],
+                        $form["valid_values"]["ville"],
+                        $form["valid_values"]["cp"],
+                        $form["valid_values"]["surface"],
+                        $form["valid_values"]["prix"],
+                        $isImageOK["newPath"],
+                        $form["valid_values"]["type"],
+                        $form["valid_values"]["description"]
+                    );
                 }
-          
-                
             } elseif ($form["status"] === false) {
                 // $this->utils->dd($form); 
                 //$_SESSION["invalid_form"] = $form; 
@@ -107,5 +104,11 @@ class LogementController
     {
         $logement = $this->logementManager->getLogementById($id);
         require_once('View/edit.logement.view.php');
+    }
+
+    public function deleteLogement($id)
+    {
+        $this->logementManager->deleteLogementBD($id);
+        header("Location:" . URL . "logement");
     }
 }
