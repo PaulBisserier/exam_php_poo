@@ -15,6 +15,7 @@ $utils = new Utils;?>
       <th>photo</th>
       <th>type</th>
       <th colspan="4">description</th>
+      <th>v  </th>
     </tr>
   </thead>
   <tbody>

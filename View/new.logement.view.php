@@ -19,17 +19,17 @@
     <!-- Code postal du logement  -->
     <div class="form-group">
         <label for="cp">Code postal du logement</label>
-        <input type="" class="form-control" name="cp" id="cp" required="required">
+        <input type="" class="form-control" name="cp" id="cp" min="0" required="required">
     </div>
     <!-- Surface du logement -->
     <div class="form-group">
         <label for="surface">Surface du logement</label>
-        <input type="number" class="form-control" name="surface" id="surface" required="required">
+        <input type="number" class="form-control" name="surface" id="surface" min="0" required="required">
     </div>
     <!-- Prix du logement -->
     <div class="form-group">
         <label for="prix">Prix du logement</label>
-        <input type="number" class="form-control" name="prix" id="prix" required="required">
+        <input type="number" class="form-control" name="prix" id="prix" min="0" required="required">
     </div>
     <!-- Photo du logement -->
     <div class="form-group">

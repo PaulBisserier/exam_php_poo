@@ -2,10 +2,7 @@
 define("URL" , str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "http") . "://".$_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] ));
 
 require_once "Controller/LogementController.php";
-require_once "Controller/HomeController.php"; 
-
 $logementController = new LogementController;
-$homeController = new HomeController; 
 
 if(empty($_GET['page'])){
     require_once "view/home.view.php";
@@ -13,7 +10,7 @@ if(empty($_GET['page'])){
     $url = explode("/", filter_var($_GET['page']), FILTER_SANITIZE_URL );
     switch($url[0]){
         case "accueil" :
-        //$homeController->homePage(); 
+        require_once 'view/home.view.php'; 
         break;
         case "logement" : 
             if(empty($url[1])){

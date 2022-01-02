@@ -55,13 +55,17 @@ class formValidator
         $result = [];
         // Tous les champs
         $fields = ["title", "adresse", "ville", "cp", "surface", "type", "prix", "description"];
+        //champs obligatoires
+        $mandatoryFields = ["title", "adresse", "ville", "cp", "surface", "type", "prix"];
         // champs devant être de type string
         $mustBeString = ["title", "ville", "adresse", "type", "description"];
         // options retour de valeurs positives
         $options = ["options" => ["min_range" => 0]];
         //controle des champs soumis par l'utilisateur
+
         foreach ($fields as $field) {
-            if ($this->isEmpty($data[$field])) {
+
+            if ($this->isEmpty($data[$field]) || $this->isEmpty($data[$field]) == false && $field === "description") {
                 if (in_array($field, $mustBeString) == true) {
                     if (!is_numeric($data[$field])) {
                         $values[$field] = $data[$field];
@@ -73,10 +77,8 @@ class formValidator
                     }
                 } else {
                     if (filter_var($data[$field], FILTER_VALIDATE_INT, $options) && is_numeric($data[$field])) {
-                        // echo gettype($data[$field]) . " " . $field . " " . " " . $data[$field] .  "<br>";
                         $values[$field] = $data[$field];
                     } else {
-                        //echo $data[$field];
                         $errors[$field] = $field;
                         $errors[$field] = [
                             "message" => "Entrez un entier positif",
@@ -122,7 +124,6 @@ class formValidator
             }
 
             if (!empty($errors)) {
-                //$this->utils->dd($errors); 
                 $result = [
                     "status" => false,
                     "message" => "invalid",
