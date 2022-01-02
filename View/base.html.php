@@ -34,8 +34,10 @@
         <h1 class="my-4 text-center bg-secondary shadow p-2">
             <?= $title ?>
         </h1>
-
-        <?= $content ?>
+<div class="row">
+    <?= $content ?>
+</div>
+        
         
     </div>
 

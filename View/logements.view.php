@@ -1,4 +1,7 @@
 <?php ob_start();?>
+<?php
+require_once "Service/Utils.php"; 
+$utils = new Utils;?>
 
 <table class="table table-hover text-center">
   <thead class="table-dark">
@@ -29,7 +32,7 @@
               <?php endif;?>
             </td>
             <td><?= $logement->getType()?></td>
-            <td><?= $logement->getDescription()?></td>
+            <td><?= $utils->textView($logement->getDescription())?></td>
             <td><a href="<?= URL ?>logement/edit/<?= $logement->getId_logement() ?>"><i class="fas fa-edit"></i></a></td>
             <td>
               <form action="<?= URL ?>logement/delete/<?= $logement->getId_logement() ?>" method="post" 

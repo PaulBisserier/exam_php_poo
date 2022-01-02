@@ -18,6 +18,16 @@ class LogementManager extends Manager
         return $this->logements;
     }
 
+    public function getLastLogements()
+    {
+        $req  = $this->getBdd()->prepare("SELECT * FROM logement ORDER BY id_logement DESC LIMIT 3");
+        $req->execute();
+        $result = $req->fetchAll(PDO::FETCH_OBJ);
+        $req->closeCursor();   
+
+        return $result;
+    }
+
     /**
      * récupère tous les logements présents en base.
      */
@@ -94,20 +104,21 @@ class LogementManager extends Manager
         $statement->closeCursor();
 
         if ($result) {
-           return $result;
+            return $result;
         }
     }
 
-    public function deleteLogementBD($id){
+    public function deleteLogementBD($id)
+    {
         $req = "DELETE FROM logement WHERE id_logement = :id_logement";
         $statement = $this->getBdd()->prepare($req);
         $statement->bindValue(":id_logement", $id, PDO::PARAM_INT);
         $result = $statement->execute();
         $statement->closeCursor();
 
-        if($result ){
-          $game = $this->getLogementById($id);    
-          unset($game);
+        if ($result) {
+            $game = $this->getLogementById($id);
+            unset($game);
         }
     }
 }

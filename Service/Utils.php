@@ -30,4 +30,21 @@ class Utils
             mkdir($path, 0777, true);
         }
     }
+        
+    /**
+     * textView
+     * Retourne les chaines de caratères > 150 char avec "..." à la fin. 
+     * @param  mixed $string
+     * @return void
+     */
+    public function textView($string)
+    {
+        // compte le nb de caractères présent dans la chaine de caractères.
+        if( strlen($string) > 150) {
+            $newString = substr($string, 0, 150) . "..."; 
+            return $newString;
+        } else {
+            return $string; 
+        }
+    }
 }
